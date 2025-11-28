@@ -22,6 +22,13 @@ public class GeometryDbContext : DbContext
     public DbSet<CubeDBO> Cubes { get; set; } = null!;
 
     /// <summary>
+    /// Gets or sets the DbSet for cylinder entities.
+    /// </summary>
+
+    public DbSet<CylinderDBO> Cylinders { get; set; } = null!;
+
+
+    /// <summary>
     /// Configures the model that was discovered by convention from the entity types
     /// exposed in <see cref="DbSet{TEntity}"/> properties on the derived context.
     /// </summary>
@@ -37,5 +44,16 @@ public class GeometryDbContext : DbContext
             entity.Property(e => e.SideLength)
                 .IsRequired();
         });
+
+        modelBuilder.Entity<CylinderDBO>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Radius)
+                .IsRequired();
+
+            entity.Property(e => e.Height)
+                .IsRequired();
+        });
+
     }
 }
